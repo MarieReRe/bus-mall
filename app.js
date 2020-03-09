@@ -2,17 +2,27 @@
 console.log('This is the bus mall');
 
 
+/* Array to store large amount of image data for the randomization*/
+
+var productNames = ['bag', 'banana', 'bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon', 'pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
+var productUrl = ['images/bag.jpeg','images/banana.jpeg','images/bathroom.jpeg','images/boots.jpeg','images/breakfast.jpeg','images/bubblegum.jpeg', 'images/chair.jpeg','images/cthulhu.jpeg','images/dog-duck.jpeg','images/dragon.jpeg','images/pen.jpeg','images/pet-sweep.jpeg','images/scissors.jpeg','images/shark.jpeg','images/sweep.jpeg','images/tauntaun.jpeg','images/unicorn.jpeg','images/busb.jpeg','images/water-can.jpeg','images/wine-glass.jpeg'];
+
+var currentImages = ['bag', 'boots','banana'];
+//so we can update when we decide on what the next image will be 
+var nextImage = [];
+
 var imageElements = document.getElementsByTagName('img');
 
 
 var productIndex1 = 0;
 var productIndex2 = 0;
-var rounds 25;
+var productIndex2 = 0;
+var rounds = 25;
 var totalProducts = [];
 
 
 //Add constructor function 
-function Advert (name, imageUrl) {
+function Advertisement  (name, imageUrl) {
     this.name = name;
     this.imageUrl = imageUrl;
     this.timesClicked = 0;
@@ -20,34 +30,20 @@ function Advert (name, imageUrl) {
 }
 
 
-function imageWasClicked() {
-    //track total clicks 
-    totalClicks++;
-    console.log('image was clicked');
-
-    if (event.srcElement.id === '1') {
-        img1Clicked++;
-
-    } else if (event.srcElement.id === '2') {
-        allImages
-        // img2Clicked++;
-    }
+ for(var i = 0; i < productNames.length; i++){
+    totalProducts.push(new Advertisement(productNames[i],productUrl[i]));
+ }
 
 
-if(img1Clicked + img2Clicked >= 5){
-    var footerElement = document.getElementsByTagName('footer')[0];
-        footerElement.textContent = `You picked image 1 ${img1Clicked} times and image 2 ${img2Clicked} times.`; /*temporate literal */
-    }
+// Creation of the random images
+function newProductImage(){
+for(var i = 0; i < currentImages.length; i++){
+    var nextProductIndex = Math.floor(Math.random() * totalProducts.length);
+    while(currentImages.includes(productNames[nextProductIndex]) && nextImage.includes(productNames[nextProductIndex])){
+        nextProductIndex = Math.floor(Math.random() * totalProducts.length)
+    } 
+    nextImage[i] = productNames[nextProductIndex];  
 }
 
-
 }
-
-
-var imageElements = document.getElementsByTagName('img');
-
-for (var i = 0; i < imageElements.length; i++) {
-    console.log('this is the event listener, for the clock on image, woo');
-    debugger;
-    imageElements[i].addEventListener('click', imageWasClicked);
-}
+var = document.getElementsByTagName('img')

@@ -11,7 +11,6 @@ console.log('This is the bus mall');
 /* Array to store large amount of image data for the randomization*/
 
 var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var productUrl = ['images/bag.jpg', 'images/banana.jpg', 'images/bathroom.jpg', 'images/boots.jpg', 'images/breakfast.jpg', 'images/bubblegum.jpg', 'images/chair.jpg', 'images/cthulhu.jpg', 'images/dog-duck.jpg', 'images/dragon.jpg', 'images/pen.jpg', 'images/pet-sweep.jpg', 'images/scissors.jpg', 'images/shark.jpg', 'images/sweep.jpg', 'images/tauntaun.jpg', 'images/unicorn.jpg', 'images/busb.jpg', 'images/water-can.jpg', 'images/wine-glass.jpg'];
 
 var currentImages = ['bag', 'boots', 'banana'];
 //so we can update when we decide on what the next image will be 
@@ -24,54 +23,36 @@ var productElement = document.getElementsByTagName('img');
 var productIndex1 = 0;
 var productIndex2 = 1;
 var productIndex3 = 2;
-var rounds = 25;
+var rounds = 10;
 var totalProducts = [];
 
 
 //Add constructor function 
 function Advertisement(name, imageUrl) {
     this.name = name;
-    this.imageUrl = imageUrl;
+    this.path = 'images/' + name + '.jpg'
     this.timesClicked = 0;
     this.timesShown = 0; 
-    // totalProducts.push(this);
 }
 
 
 for (var i = 0; i < productNames.length; i++) {
-    totalProducts.push(new Advertisement(productNames[i], productUrl[i]));
-    console.log(totalProducts);
+    totalProducts.push(new Advertisement(productNames[i]));
 }
 
-function getNewAdvertisement(nameOfThePropertyIWant)
-var answer = [];
-for(var i =0; i <totalProducts.length; i++){
-    answer[i] = totalProducts[i][nameOfThePropertyIWant];
+// function getNewAdvertisement(nameOfThePropertyIWant)
+// var answer = [];
+// for(var i =0; i <totalProducts.length; i++){
+//     answer[i] = totalProducts[i][nameOfThePropertyIWant];
 
-}
-//add logic so that the images are not repeated
-// Creation of the random images
-function newProductImage() {
-    console.log(totalProducts.length);
-    for (var i = 0; i < currentImages.length; i++) {
-        var nextProductIndex = Math.floor(Math.random() * totalProducts.length);
-    
-        while (currentImages.includes(productNames[nextProductIndex]) || nextImage.includes(productNames[nextProductIndex])) {
-            nextProductIndex = Math.floor(Math.random() * totalProducts.length)
-        }
-
-        console.log(nextProductIndex);
-        nextImage[i] = productNames[nextProductIndex];
-    }
-    currentImages = nextImage;
-    console.log(currentImages);
-}
+// }
 
 
-//set up reference to index (would we use an array for the nextImage?)
-productIndex1 = nextImage[0];
-productIndex2 = nextImage [1] ; 
-productIndex3 = nextImage[2];
+
+
+// productIndex1 = nextImage[0];
+// productIndex2 = nextImage[1]; 
+// productIndex3 = nextImage[2];
 
 
 
@@ -86,36 +67,126 @@ function imageWasClicked(event) {
     } else if (event.srcElement === 'thirdProduct') {
         totalProducts[productIndex3].timesClicked++;
     }
-    newProductImage();
+    // newProductImage();
     console.log(totalClicks);
 
-}
+
+    var nextproductIndex1 = Math.floor(Math.random() * totalProducts.length);
+    while ((nextproductIndex1 === productIndex1) || (nextPizzaIndex2 === nextproductIndex1)){
+      nextproductIndex1 = Math.floor(Math.random() * totalProducts.length);
+    }
+    var nextPizzaIndex2 = Math.floor(Math.random() * totalProducts.length);
+    while((nextPizzaIndex2 === productIndex2) || (nextPizzaIndex2 === nextproductIndex1)){
+      nextPizzaIndex2 = Math.floor(Math.random() * totalProducts.length);
+    }
+    var nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
+    while((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextproductIndex1)){
+      nextPizzaIndex2 = Math.floor(Math.random() * totalProducts.length);
+    }
+    var nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
+    while((nextProductIndex3 === productIndex2) || (nextProductIndex3 === nextproductIndex1)){
+      nextPizzaIndex2 = Math.floor(Math.random() * totalProducts.length);
+    }
+    //Set up a ref to productIndex1
+    productIndex1 = nextproductIndex1;
+    productIndex2 = nextProductIndex2;
+    productIndex3 = nextProductIndex3;
+    //Pick a random picture to display
+    productElement[0].src = totalProducts[productIndex1].path;
+    totalProducts[productIndex1].timesShown++;
+    productElement[1].src = totalProducts[productIndex2].path;
+    totalProducts[productIndex2].timesShown++;
+    productElement[2].src = totalProducts[productIndex3].path;
+    totalProducts[productIndex2].timesShown++;
+  
 
 
-
-// if(totalClicks >= rounds) {
-//     var footerElement = document.getElementsByTagName('footer')[0];
-//     //remover first child h2
-//     if(footerElement.firstElementChild){
-//         footerElement.firstElementChild.remove();
-//     }
-// }
-
-
-function render (){
-    //access arrray then get corresponding images then render to page 
-    for(var i = 0; i < productElement.length; i++){
-       console.log( productElement[i].src)
-        
+    if(totalClicks >= rounds) {
+    var asideUl = document.getElementById('voterResults');
+    for(i = 0; i < totalProducts.length; i++){
+      var voteResultListItem = document.createElement('li');
+      voteResultListItem.textContent = `${totalProducts[i].name} was clicked on
+       ${totalProducts[i].timesClicked} times and was shown ${totalProducts[i].timesShown} times.`;
+      asideUl.appendChild(voteResultListItem);
     }
 
-    console.log(productElement);
-}
+
+
+
+        for (var i = 0; i < currentImages.length; i++) {
+            productElement[i].removeEventListener('click', imageWasClicked);
+        }
+
+    }// end of the if total click
+} // close image was clicked function 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 for (var i = 0; i < currentImages.length; i++) {
-    // debugger;
-    console.log('clicked images');
     productElement[i].addEventListener('click', imageWasClicked);
 }
 /* Use pet adoption example for how to render results on screen*/

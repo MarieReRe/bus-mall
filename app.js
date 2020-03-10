@@ -1,3 +1,10 @@
+// []Create a constructor function that creates an object associated with each product, and has the following properties:
+//[] Name of the product
+// []file path of image
+
+// []Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
+
+
 'use strict';
 console.log('This is the bus mall');
 
@@ -5,7 +12,7 @@ console.log('This is the bus mall');
 /* Array to store large amount of image data for the randomization*/
 
 var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var productUrl = ['images/bag.jpeg', 'images/banana.jpeg', 'images/bathroom.jpeg', 'images/boots.jpeg', 'images/breakfast.jpeg', 'images/bubblegum.jpeg', 'images/chair.jpeg', 'images/cthulhu.jpeg', 'images/dog-duck.jpeg', 'images/dragon.jpeg', 'images/pen.jpeg', 'images/pet-sweep.jpeg', 'images/scissors.jpeg', 'images/shark.jpeg', 'images/sweep.jpeg', 'images/tauntaun.jpeg', 'images/unicorn.jpeg', 'images/busb.jpeg', 'images/water-can.jpeg', 'images/wine-glass.jpeg'];
+var productUrl = ['images/bag.jpg', 'images/banana.jpg', 'images/bathroom.jpg', 'images/boots.jpg', 'images/breakfast.jpg', 'images/bubblegum.jpg', 'images/chair.jpg', 'images/cthulhu.jpg', 'images/dog-duck.jpg', 'images/dragon.jpg', 'images/pen.jpg', 'images/pet-sweep.jpg', 'images/scissors.jpg', 'images/shark.jpg', 'images/sweep.jpg', 'images/tauntaun.jpg', 'images/unicorn.jpg', 'images/busb.jpg', 'images/water-can.jpg', 'images/wine-glass.jpg'];
 
 var currentImages = ['bag', 'boots', 'banana'];
 //so we can update when we decide on what the next image will be 
@@ -32,6 +39,7 @@ function Advertisement(name, imageUrl) {
 
 for (var i = 0; i < productNames.length; i++) {
     totalProducts.push(new Advertisement(productNames[i], productUrl[i]));
+    console.log(totalProducts);
 }
 
 // Creation of the random images
@@ -78,13 +86,14 @@ function render (){
        console.log( productElement[i].src)
         
     }
-}
 
-
-
-console.log(productElement);
+    console.log(productElement);
 
 for (var i = 0; i < currentImages.length; i++) {
     // debugger;
     productElement[i].addEventListener('click', imageWasClicked);
 }
+}
+
+
+/* Use ped adoption example for how to render results on screen*/

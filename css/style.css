@@ -4,6 +4,7 @@
   #page-container {
     position: relative;
     min-height: 200px;
+    
   }
   #content-wrapper {
     padding-bottom: 300px; /* Footer height so that text does not go behind */
@@ -40,27 +41,45 @@ header {
 
 
 /* ------------ Main Styling -----------*/
+body{
+    background-color: lightskyblue;
+}
+main{
+    padding: 30px;
+}
 h1 {
  font-size: 35px;
  color: crimson;
 }
-h2{
 
+.image-wrapper {
+    text-align: center;
 }
 .randomImages{
-    padding: 30px;
+ padding: 30px;
+  display: inline-block;
 
 }
+.voter-wrapper {
+    text-align: center;
+}
 aside{
-    background-color: blueviolet;
+    background-color: rgb(215, 187, 241);
     height: 500px;
     width: 550px;
+    display: inline-block;
 }
 
 /* ------------ Footer Styling -----------*/
 footer{
     background-color: darkgreen;
     height: 100px;
+    footer {
+        position: fixed;
+        width: 100%;
+        clear: both;
+      }
+      
 }
 h2{
     font-size: 35px;

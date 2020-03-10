@@ -80,6 +80,17 @@ function imageWasClicked(event) {
 
 
 
+if(totalClicks >= rounds) {
+    var footerElement = document.getElementsByTagName('footer')[0];
+    //remover first child h2
+    if(footerElement.firstElementChild){
+        footerElement.firstElementChild.remove();
+    }
+}
+//create li 
+}
+
+
 
 
 function render (){

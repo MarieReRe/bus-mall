@@ -1,7 +1,6 @@
 // []Create a constructor function that creates an object associated with each product, and has the following properties:
 //[] Name of the product
 // []file path of image
-
 // []Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
 
 
@@ -49,7 +48,7 @@ for(var i =0; i <totalProducts.length; i++){
     answer[i] = totalProducts[i][nameOfThePropertyIWant];
 
 }
-
+//add logic so that the images are not repeated
 // Creation of the random images
 function newProductImage() {
     console.log(totalProducts.length);
@@ -96,12 +95,7 @@ if(totalClicks >= rounds) {
 }
 
 
-
-
-
-
 function render (){
-   
     //access arrray then get corresponding images then render to page 
     for(var i = 0; i < productElement.length; i++){
        console.log( productElement[i].src)
@@ -109,9 +103,8 @@ function render (){
     }
 
     console.log(productElement);
-
-
 }
+
 
 for (var i = 0; i < currentImages.length; i++) {
     // debugger;
@@ -119,6 +112,8 @@ for (var i = 0; i < currentImages.length; i++) {
     productElement[i].addEventListener('click', imageWasClicked);
 }
 /* Use pet adoption example for how to render results on screen*/
+
+
 
 
 
@@ -131,7 +126,7 @@ function renderMyChart(){
             labels:getNewAdvertisement('name'), //add function
             datasets: [{
                 label: '# of Votes',
-                data: getNewAdvertisement('times clicked')//add another function
+                data: getNewAdvertisement('times clicked'),//add another function
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

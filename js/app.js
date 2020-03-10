@@ -18,12 +18,13 @@ var currentImages = ['bag', 'boots', 'banana'];
 //so we can update when we decide on what the next image will be 
 var nextImage = [];
 
-var imageElements = document.getElementsByTagName('img');
+// var imageElements = document.getElementsByTagName('img');
+var productElement = document.getElementsByTagName('img');
 
 
 var productIndex1 = 0;
-var productIndex2 = 0;
-var productIndex3 = 0;
+var productIndex2 = 1;
+var productIndex3 = 2;
 var rounds = 25;
 var totalProducts = [];
 
@@ -51,6 +52,7 @@ function newProductImage() {
         while (currentImages.includes(productNames[nextProductIndex]) || nextImage.includes(productNames[nextProductIndex])) {
             nextProductIndex = Math.floor(Math.random() * totalProducts.length)
         }
+
         console.log(nextProductIndex);
         nextImage[i] = productNames[nextProductIndex];
     }
@@ -73,6 +75,7 @@ function imageWasClicked(event) {
     }
     newProductImage();
     console.log(totalClicks);
+
 }
 
 
@@ -80,7 +83,7 @@ function imageWasClicked(event) {
 
 
 function render (){
-    var productElement = document.getElementsByTagName('img');
+   
     //access arrray then get corresponding images then render to page 
     for(var i = 0; i < productElement.length; i++){
        console.log( productElement[i].src)
@@ -89,11 +92,12 @@ function render (){
 
     console.log(productElement);
 
+
+}
+
 for (var i = 0; i < currentImages.length; i++) {
     // debugger;
+    console.log('clicked images');
     productElement[i].addEventListener('click', imageWasClicked);
 }
-}
-
-
 /* Use ped adoption example for how to render results on screen*/

@@ -118,12 +118,12 @@ for (var i = 0; i < currentImages.length; i++) {
     console.log('clicked images');
     productElement[i].addEventListener('click', imageWasClicked);
 }
-/* Use ped adoption example for how to render results on screen*/
+/* Use pet adoption example for how to render results on screen*/
 
 
 
 // For Chart move around if needed add after remove event listener  
-function renderMuChart(){
+function renderMyChart(){
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',

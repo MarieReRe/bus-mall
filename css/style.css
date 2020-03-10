@@ -74,11 +74,10 @@ aside{
 footer{
     background-color: darkgreen;
     height: 100px;
-    footer {
+  
         position: fixed;
         width: 100%;
         clear: both;
-      }
       
 }
 h2{

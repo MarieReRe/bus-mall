@@ -87,8 +87,8 @@ if(totalClicks >= rounds) {
         footerElement.firstElementChild.remove();
     }
 }
-//create li 
-}
+
+
 
 
 

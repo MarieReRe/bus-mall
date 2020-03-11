@@ -22,7 +22,8 @@ var productElement = document.getElementsByTagName('img');
 var productIndex1 = 0;
 var productIndex2 = 1;
 var productIndex3 = 2;
-var rounds = 25;
+var rounds = Math.ceil(Math.random() * 20) + 5;
+console.log(rounds);
 var totalProducts = [];
 
 

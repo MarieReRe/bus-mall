@@ -23,7 +23,7 @@ var productElement = document.getElementsByTagName('img');
 var productIndex1 = 0;
 var productIndex2 = 1;
 var productIndex3 = 2;
-var rounds = 10;
+var rounds = 25;
 var totalProducts = [];
 
 
@@ -129,13 +129,12 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
     // For Chart move around if needed add after remove event listener  
     function renderMyChart() {
         var ctx = document.getElementById('myChart').getContext('2d');
-console.log('hi');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: getNewAdvertisement('name'), //add function
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Advertisement Votes',
                     data: getNewAdvertisement('timesClicked'),//add another function
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

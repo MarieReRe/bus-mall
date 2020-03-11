@@ -66,6 +66,12 @@ aside {
   width: 550px;
   display: inline-block;
 }
+.resultChart{
+    float: left;
+    height: 600px;
+    width: 300px;
+    padding: 50px;
+}
 
 /* ------------ Footer Styling -----------*/
 footer {

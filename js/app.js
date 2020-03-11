@@ -1,9 +1,3 @@
-// []Create a constructor function that creates an object associated with each product, and has the following properties:
-//[] Name of the product
-// []file path of image
-// []Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
-
-
 'use strict';
 console.log('This is the bus mall');
 

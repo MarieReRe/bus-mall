@@ -28,7 +28,7 @@ var totalProducts = [];
 
 
 //Add constructor function 
-function Advertisement(name, imageUrl) {
+function Advertisement(name) {
     this.name = name;
     this.path = 'images/' + name + '.jpg'
     this.timesClicked = 0;
@@ -44,6 +44,7 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
         answer[i] = totalProducts[i][nameOfThePropertyIWant];
 
     }
+    console.log(answer);
     return answer;
 }
 
@@ -58,14 +59,16 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
 
     function imageWasClicked(event) {
         totalClicks++;
-        if (event.srcElement === 'firstProduct') {
+        if (event.srcElement.id === 'firstProduct') {
+            
             totalProducts[productIndex1].timesClicked++;
-        } else if (event.srcElement === 'secondProduct') {
+        } else if (event.srcElement.id === 'secondProduct') {
             totalProducts[productIndex2].timesClicked++;
-        } else if (event.srcElement === 'thirdProduct') {
+        } else if (event.srcElement.id === 'thirdProduct') {
             totalProducts[productIndex3].timesClicked++;
         }
-
+        console.log(event.srcElement);
+        console.log(totalProducts);
 
         var nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
 
@@ -89,6 +92,7 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
         productIndex2 = nextProductIndex2;
         productIndex3 = nextProductIndex3;
         //Pick a random picture to display
+        console.log(productIndex1);
 
         productElement[0].src = totalProducts[productIndex1].path;
         totalProducts[productIndex1].timesShown++;
@@ -111,7 +115,7 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
 
 
 
-            for (var i = 0; i < totalProducts.length; i++) {
+            for (var i = 0; i < productElement.length; i++) {
                 productElement[i].removeEventListener('click', imageWasClicked);
             }
             renderMyChart();
@@ -125,14 +129,14 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
     // For Chart move around if needed add after remove event listener  
     function renderMyChart() {
         var ctx = document.getElementById('myChart').getContext('2d');
-
+console.log('hi');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: getNewAdvertisement('name'), //add function
                 datasets: [{
                     label: '# of Votes',
-                    data: getNewAdvertisement('times clicked'),//add another function
+                    data: getNewAdvertisement('timesClicked'),//add another function
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -171,6 +175,6 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
 
 
 
-    for (var i = 0; i < totalProducts.length; i++) {
+    for (var i = 0; i < productElement.length; i++) {
         productElement[i].addEventListener('click', imageWasClicked);
     }

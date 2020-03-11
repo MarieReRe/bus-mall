@@ -48,125 +48,134 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
     return answer;
 }
 
-    for (var i = 0; i < productNames.length; i++) {
-        totalProducts.push(new Advertisement(productNames[i]));
+for (var i = 0; i < productNames.length; i++) {
+    totalProducts.push(new Advertisement(productNames[i]));
+}
+
+
+
+//for clicks
+var totalClicks = 0;
+
+function imageWasClicked(event) {
+    totalClicks++;
+    if (event.srcElement.id === 'firstProduct') {
+
+        totalProducts[productIndex1].timesClicked++;
+    } else if (event.srcElement.id === 'secondProduct') {
+        totalProducts[productIndex2].timesClicked++;
+    } else if (event.srcElement.id === 'thirdProduct') {
+        totalProducts[productIndex3].timesClicked++;
+    }
+    console.log(event.srcElement);
+    console.log(totalProducts);
+
+    var nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
+
+    while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)) {
+        nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
     }
 
+    var nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
 
+    while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)) {
+        nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
+    }
 
-    //for clicks
-    var totalClicks = 0;
+    var nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
 
-    function imageWasClicked(event) {
-        totalClicks++;
-        if (event.srcElement.id === 'firstProduct') {
-            
-            totalProducts[productIndex1].timesClicked++;
-        } else if (event.srcElement.id === 'secondProduct') {
-            totalProducts[productIndex2].timesClicked++;
-        } else if (event.srcElement.id === 'thirdProduct') {
-            totalProducts[productIndex3].timesClicked++;
-        }
-        console.log(event.srcElement);
-        console.log(totalProducts);
+    while ((nextProductIndex3 === productIndex2) || (nextProductIndex3 === nextProductIndex1)) {
+        nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
+    }
+    //Set up a ref to productIndex1
+    productIndex1 = nextProductIndex1;
+    productIndex2 = nextProductIndex2;
+    productIndex3 = nextProductIndex3;
+    //Pick a random picture to display
+    console.log(productIndex1);
 
-        var nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
-
-        while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)) {
-            nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
-        }
-
-        var nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
-
-        while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)) {
-            nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
-        }
-
-        var nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
-
-        while ((nextProductIndex3 === productIndex2) || (nextProductIndex3 === nextProductIndex1)) {
-            nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
-        }
-        //Set up a ref to productIndex1
-        productIndex1 = nextProductIndex1;
-        productIndex2 = nextProductIndex2;
-        productIndex3 = nextProductIndex3;
-        //Pick a random picture to display
-        console.log(productIndex1);
-
-        productElement[0].src = totalProducts[productIndex1].path;
-        totalProducts[productIndex1].timesShown++;
-        productElement[1].src = totalProducts[productIndex2].path;
-        totalProducts[productIndex2].timesShown++;
-        productElement[2].src = totalProducts[productIndex3].path;
-        totalProducts[productIndex2].timesShown++;
+    productElement[0].src = totalProducts[productIndex1].path;
+    totalProducts[productIndex1].timesShown++;
+    productElement[1].src = totalProducts[productIndex2].path;
+    totalProducts[productIndex2].timesShown++;
+    productElement[2].src = totalProducts[productIndex3].path;
+    totalProducts[productIndex2].timesShown++;
 
 
 
-        if (totalClicks >= rounds) {
-            var asideUl = document.getElementById('voterResults');
-            for (i = 0; i < totalProducts.length; i++) {
-                var voteResultListItem = document.createElement('li');
-                voteResultListItem.textContent = `${totalProducts[i].name} was clicked on
+    if (totalClicks >= rounds) {
+        var asideUl = document.getElementById('voterResults');
+        for (i = 0; i < totalProducts.length; i++) {
+            var voteResultListItem = document.createElement('li');
+            voteResultListItem.textContent = `${totalProducts[i].name} was clicked on
                 ${totalProducts[i].timesClicked} times and was shown ${totalProducts[i].timesShown} times.`;
-                asideUl.appendChild(voteResultListItem);
-            }
+            asideUl.appendChild(voteResultListItem);
+        }
 
 
 
 
-            for (var i = 0; i < productElement.length; i++) {
-                productElement[i].removeEventListener('click', imageWasClicked);
-            }
-            renderMyChart();
-        }// end of the if total click
-    } // close image was clicked function 
+        for (var i = 0; i < productElement.length; i++) {
+            productElement[i].removeEventListener('click', imageWasClicked);
+        }
+        renderMyChart();
+    }// end of the if total click
+} // close image was clicked function 
 
 
 
 
 
-    // For Chart move around if needed add after remove event listener  
-    function renderMyChart() {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: getNewAdvertisement('name'), //add function
-                datasets: [{
-                    label: 'Advertisement Votes',
-                    data: getNewAdvertisement('timesClicked'),//add another function
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
+// For Chart move around if needed add after remove event listener  
+function renderMyChart() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: getNewAdvertisement('name'), //add function
+            datasets: [{
+                label: 'Advertisement Votes',
+                data: getNewAdvertisement('timesClicked'),//add another function
+                backgroundColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(153, 102, 255)',
+                    'rgba(255, 159, 64)',
+                    'rgba(182, 86, 245)',
+                    'rgba(66, 245, 164)',
+                    'rgba( 255, 5, 205)',
+                    'rgba(17, 17, 186)',
+                    'rgba(17, 181, 186)',
+                    'rgba(253, 255, 115)',
+                    'rgba(255, 115, 115)',
+                    'rgba(17, 17, 186)',
+                    'rgba(17, 181, 186)',
+                    'rgba(253, 255, 115)',
+                    'rgba(255, 204, 145)',
+                    'rgba(17, 17, 186)',
+                    'rgba(17, 181, 186)',
+                    'rgba(253, 255, 115)',
+                    'rgba(61, 35,74)',
+
+                ],
+
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1
-                        }
-                    }]
-                }
             }
-        });
-    }
+        }
+    });
+}
 
 
 
@@ -174,6 +183,6 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
 
 
 
-    for (var i = 0; i < productElement.length; i++) {
-        productElement[i].addEventListener('click', imageWasClicked);
-    }
+for (var i = 0; i < productElement.length; i++) {
+    productElement[i].addEventListener('click', imageWasClicked);
+}

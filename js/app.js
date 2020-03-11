@@ -12,7 +12,6 @@ console.log('This is the bus mall');
 
 var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
-var currentImages = ['bag', 'boots', 'banana'];
 //so we can update when we decide on what the next image will be 
 var nextImage = [];
 
@@ -72,19 +71,19 @@ function imageWasClicked(event) {
 
     var nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)) {
+    while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)|| (nextProductIndex1 === productIndex3)) {
         nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
     }
 
     var nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)) {
+    while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1|| (nextProductIndex1 === productIndex2) || (nextProductIndex2 === nextProductIndex3) || (nextProductIndex1 === productIndex1))) {
         nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
     }
 
     var nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex3 === productIndex2) || (nextProductIndex3 === nextProductIndex1)) {
+    while ((nextProductIndex3 === productIndex2) || (nextProductIndex3 === nextProductIndex1) || (nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)) {
         nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
     }
     //Set up a ref to productIndex1

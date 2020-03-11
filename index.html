@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,57 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <main>
-<aside>
-    <ul id="voterResults">
-        
-    </ul>
-</aside>
-<section>
-    <img id="firstProduct" src="images/bag.jpg" alt="bag">
-    <img id="secondProduct" src="images/banana.jpg" alt="banana">
-    <img id="thirdProduct" src="images/boots.jpg" alt="boots">
-    
-</section>
 
-    </main>
-    <footer>
-        <h2>Vote On These Amazing New Products We Have To Offer!!</h2>
-    </footer>
-    <script src="app.js"></script>
+<body>
+    <div id="page-container">
+        <div id="content-wrapper">
+            
+            <header>
+                <h1> The Bus Mall</h1>
+                <nav class="headerNavBar">
+                    <a href="#home">Home</a>
+                    <a href="#aboutProducts">About the Products</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#classes">Where We Advertise</a>
+                </nav>
+            </header>
+            <main>
+                <div class="image-wrapper">
+                    <section class="randomImages">
+                        <img id="firstProduct" src="images/bag.jpg" alt="bag">
+                        <img id="secondProduct" src="images/banana.jpg" alt="banana">
+                        <img id="thirdProduct" src="images/boots.jpg" alt="boots">
+                    </section>
+                </div>
+
+
+
+                <!-- Where the resuts will be stored and revealed -->
+                <span class="voter-wrapper">
+                    <aside>
+                        <h3>List of Results</h3>
+                        <ul id="voterResults">
+    
+                        </ul>
+                    </aside>
+                </span>
+                <span class="resultChart">
+                    <h2>Vote on the Amazing Products We have to Offer</h2>
+                    <canvas id="myChart" width="400" height="400"></canvas>
+
+                </span>
+                
+
+            </main>
+        </div>
+        <footer>
+            <!-- <h2>Vote On These Amazing New Products We Have To Offer!!</h2>
+            <canvas id="myChart" width="400" height="400"></canvas> -->
+
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="js/app.js"></script>
+    </div>
 </body>
+
 </html>

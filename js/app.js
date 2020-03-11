@@ -35,7 +35,10 @@ function Advertisement(name) {
     this.timesShown = 0;
 }
 
-
+//add prototype
+Advertisement.prototype.toString = function () {
+    return `${this.name} advertisement is from out this.name for the specified arrayIndex, clicked ${this.timesClicked} times.`;
+}
 
 
 function getNewAdvertisement(nameOfThePropertyIWant) {
@@ -48,9 +51,26 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
     return answer;
 }
 
-for (var i = 0; i < productNames.length; i++) {
-    totalProducts.push(new Advertisement(productNames[i]));
+
+//is there local storage go see and get if it is true
+var savedAdvertisementsString = localStorage.getItem('savedAdvertisements');
+if(savedAdvertisementsString){
+    var arrayOfNotAdvertisementObjects = JSON.parse(savedAdvertisementsString);
+    for(var i = 0; i < arrayOfNotAdvertisementObjects.length; i++){
+        new Advertisement(arrayOfNotAdvertisementObjects[i].name, arrayOfNotAdvertisementObjects.path, arrayOfNotAdvertisementObjects.timesClicked);
+    }
+    
 }
+else {
+    for (var i = 0; i < productNames.length; i++) {
+        totalProducts.push(new Advertisement(productNames[i]));
+    }
+}
+
+
+
+
+
 
 
 
@@ -72,13 +92,13 @@ function imageWasClicked(event) {
 
     var nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)|| (nextProductIndex1 === productIndex3)) {
+    while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1) || (nextProductIndex1 === productIndex3)) {
         nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
     }
 
     var nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1|| (nextProductIndex1 === productIndex2) || (nextProductIndex2 === nextProductIndex3) || (nextProductIndex1 === productIndex1))) {
+    while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1 || (nextProductIndex1 === productIndex2) || (nextProductIndex2 === nextProductIndex3) || (nextProductIndex1 === productIndex1))) {
         nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
     }
 
@@ -104,6 +124,7 @@ function imageWasClicked(event) {
 
 
     if (totalClicks >= rounds) {
+        localStorage.setItem('savedAdvertisements', JSON.stringify(totalProducts));
         var asideUl = document.getElementById('voterResults');
         for (i = 0; i < totalProducts.length; i++) {
             var voteResultListItem = document.createElement('li');
@@ -179,10 +200,14 @@ function renderMyChart() {
 
 
 
-
-
-
-
 for (var i = 0; i < productElement.length; i++) {
     productElement[i].addEventListener('click', imageWasClicked);
 }
+
+
+
+
+
+
+
+

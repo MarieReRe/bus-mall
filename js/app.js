@@ -1,9 +1,3 @@
-// []Create a constructor function that creates an object associated with each product, and has the following properties:
-//[] Name of the product
-// []file path of image
-// []Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
-
-
 'use strict';
 console.log('This is the bus mall');
 
@@ -12,7 +6,6 @@ console.log('This is the bus mall');
 
 var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
-var currentImages = ['bag', 'boots', 'banana'];
 //so we can update when we decide on what the next image will be 
 var nextImage = [];
 
@@ -23,7 +16,8 @@ var productElement = document.getElementsByTagName('img');
 var productIndex1 = 0;
 var productIndex2 = 1;
 var productIndex3 = 2;
-var rounds = 25;
+var rounds = Math.ceil(Math.random() * 20) + 5;
+console.log(rounds);
 var totalProducts = [];
 
 
@@ -36,8 +30,6 @@ function Advertisement(name) {
 }
 
 
-
-
 function getNewAdvertisement(nameOfThePropertyIWant) {
     var answer = [];
     for (var i = 0; i < totalProducts.length; i++) {
@@ -48,19 +40,29 @@ function getNewAdvertisement(nameOfThePropertyIWant) {
     return answer;
 }
 
+
+//is there local storage go see and get if it is true
+var savedAdvertisementsString = localStorage.getItem('savedAdvertisements');
+if(savedAdvertisementsString){
+   totalProducts = JSON.parse(savedAdvertisementsString);
+    }  
+
+else {
 for (var i = 0; i < productNames.length; i++) {
     totalProducts.push(new Advertisement(productNames[i]));
 }
-
+  
+}
 
 
 //for clicks
 var totalClicks = 0;
 
 function imageWasClicked(event) {
+    console.log(productIndex2);
+    console.log(totalProducts[0]);
     totalClicks++;
     if (event.srcElement.id === 'firstProduct') {
-
         totalProducts[productIndex1].timesClicked++;
     } else if (event.srcElement.id === 'secondProduct') {
         totalProducts[productIndex2].timesClicked++;
@@ -70,21 +72,26 @@ function imageWasClicked(event) {
     console.log(event.srcElement);
     console.log(totalProducts);
 
+
+
+
+    //this ensures images are not repeated 
+
     var nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex1 === productIndex1) || (nextProductIndex2 === nextProductIndex1)) {
+    while ((nextProductIndex1 === productIndex1) || (nextProductIndex1 === productIndex2) || (nextProductIndex1 === productIndex3)) {
         nextProductIndex1 = Math.floor(Math.random() * totalProducts.length);
     }
 
     var nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)) {
+    while ((nextProductIndex2 === productIndex1) || (nextProductIndex2 === productIndex2) || (nextProductIndex2 === productIndex3) || (nextProductIndex2 === nextProductIndex1)) {
         nextProductIndex2 = Math.floor(Math.random() * totalProducts.length);
     }
 
     var nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
 
-    while ((nextProductIndex3 === productIndex2) || (nextProductIndex3 === nextProductIndex1)) {
+    while ((nextProductIndex3 === productIndex1) || (nextProductIndex3 === productIndex2) || (nextProductIndex3 === productIndex3) || (nextProductIndex3 === nextProductIndex1) || (nextProductIndex3 === nextProductIndex2)) {
         nextProductIndex3 = Math.floor(Math.random() * totalProducts.length);
     }
     //Set up a ref to productIndex1
@@ -104,6 +111,7 @@ function imageWasClicked(event) {
 
 
     if (totalClicks >= rounds) {
+        localStorage.setItem('savedAdvertisements', JSON.stringify(totalProducts));
         var asideUl = document.getElementById('voterResults');
         for (i = 0; i < totalProducts.length; i++) {
             var voteResultListItem = document.createElement('li');
@@ -160,7 +168,6 @@ function renderMyChart() {
                     'rgba(61, 35,74)',
 
                 ],
-
                 borderWidth: 1
             }]
         },
@@ -179,10 +186,15 @@ function renderMyChart() {
 
 
 
-
-
-
-
 for (var i = 0; i < productElement.length; i++) {
     productElement[i].addEventListener('click', imageWasClicked);
 }
+
+
+
+
+
+
+
+
+

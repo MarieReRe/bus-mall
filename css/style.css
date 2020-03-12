@@ -11,7 +11,7 @@
 
 /* ------------ Header Styling -----------*/
 header {
-  background-color: rgb(171, 179, 187);
+  background-color: #ffd7d7;
   height: 200px;
   position: relative;
   width: 100%;
@@ -22,7 +22,7 @@ header {
   padding-right: 350px;
   overflow: hidden;
   height: 35px;
-  background-color: grey;
+  background-color: rgb(201, 201, 201);
   position: relative; /* Set the navbar to a position based on users scrolling */
   top: 45px; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
@@ -41,7 +41,7 @@ header {
 
 /* ------------ Main Styling -----------*/
 body {
-  background-color: lightskyblue;
+  background-color: #ffd7d7;
 }
 main {
   padding: 100px;
